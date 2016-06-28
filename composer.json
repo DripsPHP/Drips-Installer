@@ -7,6 +7,9 @@
         "drips/drips": "dev-master"
     },
     "scripts": {
+        "post-install-cmd": [
+            "php vendor/drips/drips/install.php"
+        ],
         "post-update-cmd": [
             "php vendor/drips/drips/install.php"
         ]
