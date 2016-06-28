@@ -6,5 +6,10 @@
     "require": {
         "drips/drips": "dev-master"
     },
+    "scripts": {
+        "post-update-cmd": [
+            "php vendor/drips/drips/install.php"
+        ]
+    },
 	"minimum-stability": "dev"
 }

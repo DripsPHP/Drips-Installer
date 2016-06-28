@@ -1,0 +1,9 @@
+#!/usr/bin/php
+<?php
+    if(isset($argv[1])){
+        if($argv[1] == 'install'){
+            shell_exec('php composer.phar install');
+        } elseif($argv[1] == 'update') {
+            shell_exec('php composer.phar update');
+        }
+    }
