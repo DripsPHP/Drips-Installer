@@ -1,0 +1,10 @@
+{
+    "name": "drips/installer",
+    "description": "Installer für das Drips-Framework",
+    "keywords": ["framework", "php", "drips", "prowect", "install", "installer"],
+    "license": "MIT",
+    "require": {
+        "drips/drips": "dev-master"
+    },
+	"minimum-stability": "dev"
+}
