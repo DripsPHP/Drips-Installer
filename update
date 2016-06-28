@@ -1,0 +1,4 @@
+#!/usr/bin/php
+<?php
+    shell_exec('php composer.phar update');
+    copy(__DIR__.'/vendor/drips/drips/.htaccess', DRIPS_DIRECTORY.'/.htaccess');

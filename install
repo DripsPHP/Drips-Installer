@@ -1,3 +1,4 @@
 #!/usr/bin/php
 <?php
     shell_exec('php composer.phar install');
+    copy(__DIR__.'/vendor/drips/drips/.htaccess', __DIR__.'/.htaccess'); 
