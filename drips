@@ -1,9 +1,19 @@
 #!/usr/bin/php
 <?php
+
+    define('DRIPS_CLI', __DIR__.'/vendor/drips/drips/drips');
+    define('DRIPS_DIRECTORY', __DIR__);
+
     if(isset($argv[1])){
         if($argv[1] == 'install'){
             shell_exec('php composer.phar install');
+            die();
         } elseif($argv[1] == 'update') {
             shell_exec('php composer.phar update');
+            die();
         }
+    }
+
+    if(file_exists(DRIPS_CLI)){
+        include(DRIPS_CLI);
     }

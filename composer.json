@@ -6,6 +6,9 @@
     "require": {
         "drips/drips": "dev-master"
     },
+    "require-dev": {
+        "drips/debugbar": "dev-master"
+    },
     "scripts": {
         "post-install-cmd": [
             "php vendor/drips/drips/install.php"
