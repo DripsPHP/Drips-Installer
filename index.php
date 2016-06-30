@@ -149,6 +149,14 @@ if(!is_dir(__DIR__.'/vendor')){
         <p>
             Damit Drips ordnungsgemäß funktioniert, ist ein Installationsvorgang nötig. Klicke auf den Button um den Installationsvorgang zu starten.
         </p>
+        <h3>Produktivumgebung</h3>
+        <p>
+            Sollte es sich hierbei um ein Produktivsystem handeln, führe bitte mit Abschluss des Installationsvorgangs folgendes Kommando auf der Kommandozeile (Terminal, CMD) aus:
+        </p>
+        <pre><code>php drips env prod</code></pre>
+        <cite>
+            Auch wenn du Drips bereits installiert hast, kann es sein, dass einige Abhängigkeiten fehlen - diese werden einfach nachinstalliert. Deine bestehenden Daten bleiben natürlich erhalten.</p>
+        </cite>
         <div style="text-align:center">
             <p id="drips-error" style="display: none;"><i class="fa fa-times"></i> Drips konnte nicht installiert werden!</p>
             <div id="loading" style="display: none;">
