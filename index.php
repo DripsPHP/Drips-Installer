@@ -149,11 +149,6 @@ if(!is_dir(__DIR__.'/vendor')){
         <p>
             Damit Drips ordnungsgemäß funktioniert, ist ein Installationsvorgang nötig. Klicke auf den Button um den Installationsvorgang zu starten.
         </p>
-        <h3>Produktivumgebung</h3>
-        <p>
-            Sollte es sich hierbei um ein Produktivsystem handeln, führe bitte mit Abschluss des Installationsvorgangs folgendes Kommando auf der Kommandozeile (Terminal, CMD) aus:
-        </p>
-        <pre><code>php drips env prod</code></pre>
         <cite>
             Auch wenn du Drips bereits installiert hast, kann es sein, dass einige Abhängigkeiten fehlen - diese werden einfach nachinstalliert. Deine bestehenden Daten bleiben natürlich erhalten.</p>
         </cite>
@@ -163,9 +158,25 @@ if(!is_dir(__DIR__.'/vendor')){
                 <i class="fa fa-refresh fa-spin fa-3x fa-fw color-change" style="color: #717F8C;"></i>
                 <p>Drips wird installiert ...</p>
             </div>
+            <h3 style="font-size: 14px;" id="envsel">
+                <label>Umgebung:
+                    <select name="env">
+                        <option value="dev">Development</option>
+                        <option value="prod">Production</option>
+                    </select>
+                </label>
+            </h3>
+            <br>
+            <br>
             <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
             <p id="drips-success" style="display: none;"><i class="fa fa-check"></i> Drips wurde erfolgreich installiert!</p>
             <a href="./" class="button" id="continueBtn" style="display: none;">Weiter <i class="fa fa-arrow-right"></i></a>
+            <div id="install-failed" style="display: none;text-align: left;">
+                <cite>
+                    Wenn Drips mithilfe dieses Installers nicht installiert werden kann, kannst du versuchen es manuell zu installieren. Hierfür musst du folgendes Kommando auf der Kommandozeile ausführen:
+                </cite>
+                <pre><code>php drips install</code></pre>
+            </div>
         </div>
         <script type="text/javascript">
             var colors = ['#FFCE54', '#F6BB42', '#FC6E41', '#E9573F', '#ED5565', '#DA4453', '#EC87C0', '#D770AD', '#AC92EC', '#967ADC', '#4A89DC', '#5D9CEC', '#3BAFDA', '#4FC1E9', '#37BC9B', '#48CFAD', '#A0D468', '#8CC152'];
@@ -174,7 +185,9 @@ if(!is_dir(__DIR__.'/vendor')){
             $("#installBtn").click(function(e){
                 e.preventDefault();
                 $("#drips-error").hide();
+                $("#install-failed").hide();
                 $(this).hide();
+                $("#envsel").hide();
                 $("#loading").show();
                 setInterval(function(){
                     $('.color-change').css('color', colors[current_color]);
@@ -184,15 +197,22 @@ if(!is_dir(__DIR__.'/vendor')){
                         current_color = 0;
                     }
                 }, 1500);
-                $.get('?install', function(result){
+                var url = '?install';
+                if($('envsel').val() == 'prod'){
+                    url += '&prod';
+                }
+                $.get(url, function(result){
                     $("#loading").hide();
                     if(result == 1){
                         $("#drips-success").show();
                         $("#continueBtn").show();
                     } else {
                         $("#drips-error").show();
+                        $("#install-failed").show();
                         $("#installBtn").show();
+                        $("#envsel").show();
                     }
+                    $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
                 });
             });
         </script>
@@ -202,6 +222,9 @@ if(!is_dir(__DIR__.'/vendor')){
         <?php
     } else {
         shell_exec('php composer.phar install');
+        if(isset($_GET['prod'])){
+            shell_exec('php drips env prod');
+        }
         echo (int)is_dir(__DIR__.'/vendor');
     }
 } else {
