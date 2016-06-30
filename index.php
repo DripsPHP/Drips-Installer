@@ -1,6 +1,7 @@
 <?php
 
 define('DRIPS_STARTUP', __DIR__.'/vendor/drips/drips/index.php');
+putenv('COMPOSER_HOME='.__DIR__.'/.composer');
 
 if(!is_dir(__DIR__.'/vendor')){
     if(!isset($_GET['install'])){
@@ -221,7 +222,6 @@ if(!is_dir(__DIR__.'/vendor')){
         </html>
         <?php
     } else {
-	    //chdir(__DIR__);
         shell_exec('php drips install');
         if(isset($_GET['prod'])){
             shell_exec('php drips env prod');
