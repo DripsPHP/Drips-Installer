@@ -24,6 +24,7 @@ if (!IS_INSTALLED) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github-gist.min.css"/>
             <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" charset="utf-8">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.2/animate.min.css">
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('pre code').each(function (i, block) {
@@ -156,7 +157,13 @@ if (!IS_INSTALLED) {
                 small {
                     text-align: center;
                 }
+                .morphext > .animated {
+                    display: inline-block;
+                }
         	</style>
+            <script>
+                /*! Morphext - v2.4.5 - 2015-08-26 */!function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
+            </script>
         </head>
         <body>
         	<header id="page-header">
@@ -184,7 +191,7 @@ if (!IS_INSTALLED) {
                         <p id="drips-error" style="display: none;"><i class="fa fa-times"></i> Drips konnte nicht installiert werden!</p>
                         <div id="loading" style="display: none;">
                             <i class="fa fa-refresh fa-spin fa-3x fa-fw color-change" style="color: #717F8C;"></i>
-                            <p>Drips wird installiert ...<br><br>
+                            <p><span id="status-text">Drips wird installiert ..., Abhängigkeiten werden heruntergeladen ..., Abhängigkeiten werden installiert ..., Abhängigkeiten werden aktualisiert ..., Nach Aktualisierungen suchen ..., Updates installieren ..., Installation abschließen ...</span><br><br>
                                 <small>
                                     Der Installationsprozess, kann abhängig von deiner Internetverbindung mehrere Minuten in Anspruch nehmen - wir bitten um Geduld.
                                 </small>
@@ -213,7 +220,7 @@ if (!IS_INSTALLED) {
                         <br>
                         <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
                         <p id="drips-success" style="display: none;"><i class="fa fa-check"></i> Drips wurde erfolgreich installiert!</p>
-                        <a href="./" class="button" id="continueBtn" style="display: none;">Installation abschließen <i class="fa fa-check"></i></a>
+                        <a href="./" class="button" id="continueBtn" style="display: none;"><i class="fa fa-check"></i> Installation abschließen</a>
                         <div id="install-failed" style="display: none;text-align: left;">
                             <cite>
                                 Wenn Drips mithilfe dieses Installers nicht installiert werden kann, kannst du versuchen es manuell zu installieren. Hierfür musst du folgendes Kommando auf der Kommandozeile ausführen:
@@ -232,6 +239,7 @@ if (!IS_INSTALLED) {
                             $(this).hide();
                             $("#envsel").hide();
                             $("#loading").show();
+                            current_text = 0;
                             setInterval(function(){
                                 $('.color-change').css('color', colors[current_color]);
                                 if((current_color + 1) < colors.length){
@@ -240,6 +248,10 @@ if (!IS_INSTALLED) {
                                     current_color = 0;
                                 }
                             }, 1500);
+                            $('#status-text').Morphext({
+                                animation: "fadeInRight",
+                                speed: 10000,
+                            });
                             var url = '?install';
                             if($('input[value="prod"]').is(':checked')){
                                 url += '&prod';
