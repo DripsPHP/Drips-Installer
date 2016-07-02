@@ -2,7 +2,10 @@
 
 define('DRIPS_STARTUP', __DIR__.'/vendor/drips/drips/index.php');
 define('IS_INSTALLED', is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock'));
-putenv('COMPOSER_HOME='.__DIR__.'/.composer');
+
+if(getenv('COMPOSER_HOME') === false && getenv('HOME') === false){
+    putenv('COMPOSER_HOME='.__DIR__.'/.composer');
+}
 
 if (!IS_INSTALLED) {
     if (!isset($_GET['install'])) {
@@ -177,7 +180,7 @@ if (!IS_INSTALLED) {
                         <p id="drips-error" style="display: none;"><i class="fa fa-times"></i> Drips konnte nicht installiert werden!</p>
                         <div id="loading" style="display: none;">
                             <i class="fa fa-refresh fa-spin fa-3x fa-fw color-change" style="color: #717F8C;"></i>
-                            <p>Drips wird installiert ...<br>
+                            <p>Drips wird installiert ...<br><br>
                                 <small>
                                     Der Installationsprozess, kann abhängig von deiner Internetverbindung mehrere Minuten in Anspruch nehmen - wir bitten um Geduld.
                                 </small>
@@ -264,7 +267,7 @@ if (!IS_INSTALLED) {
         if (isset($_GET['prod'])) {
             shell_exec('php drips env prod');
         }
-        echo (int) IS_INSTALLED;
+        echo (int) (is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock'));
     }
 } else {
     if (!defined('DRIPS_DIRECTORY')) {
