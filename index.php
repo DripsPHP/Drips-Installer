@@ -1,10 +1,11 @@
 <?php
 
 define('DRIPS_STARTUP', __DIR__.'/vendor/drips/drips/index.php');
+define('IS_INSTALLED', is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock'));
 putenv('COMPOSER_HOME='.__DIR__.'/.composer');
 
-if(!is_dir(__DIR__.'/vendor')){
-    if(!isset($_GET['install'])){
+if (!IS_INSTALLED) {
+    if (!isset($_GET['install'])) {
         ?>
         <!DOCTYPE html>
         <html>
@@ -25,116 +26,129 @@ if(!is_dir(__DIR__.'/vendor')){
             </script>
         	<style type="text/css">
                 @import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700);
-        body {
-        	margin:0;
-        	padding:0;
-        	font-size: 18px;
-        	font-family: 'Maven Pro', sans-serif;
-        }
-        #page-header{
-        	background-color:#434a54;
-        	color:white;
-        	min-height:250px;
-        }
-        .header_img{
-        	padding-top:12px;
-        }
-        h1{
-        	text-align:center;
-        }
-        hr{
-        	width: 80px;
-            border: none;
-            border-top: 3px solid #A0D468;
-        }
-        section {
-        	padding-top: 20px;
-        }
-        section, .header_img {
-            width: 70%;
-            margin: auto;
-        }
-        section p, section li{
-        	color:#717F8C;
-        }
-        a {
-        	color:#A0D468;
-        	text-decoration: none;
-        }
-        a:hover {
-        	text-decoration: underline;
-        	color: #8CC152;
-        }
-        .button {
-        	background-color: #A0D468;
-        	color: #FFF;
-        	display: inline-block;
-        	padding: 10px 25px;
-        	text-decoration: none !important;
-        	margin-bottom: 50px;
-        	transition: all 0.2s;
-        }
-        .button:hover {
-        	background-color: #8CC152;
-        	color: white;
-        }
-        h2 {
-        	color: #A0D468;
-        }
-        h3 {
-        	margin-top: 30px;
-        	margin-bottom: -10px;
-        	color: #434A54;
-        }
-        p > code, h2 > co {
-        	color: #DA4453;
-        }
-        pre > code {
-        	border: 1px solid #E6E9ED;
-        	border-radius: 3px;
-        	background-color: #F5F7FA !important;
-        }
-        code {
-        	font-size: 16px;
-        }
-        cite {
-        	color: #AAB2BD;
-        	border-left: 5px solid #E6E9ED;
-        	padding-left: 15px;
-        	font-style: normal;
-        	display: block;
-        	margin-top: 5px;
-        	margin-bottom: 20px;
-        }
-        @media (max-width: 992px){
-        	section, .header_img{
-        		width:80%;
-        	}
-        }
-        @media (max-width: 350px){
-        	header{
-        		height:300px;
-        	}
-        }
-        .fa-times, #drips-error {
-            color: #DA4453;
-        }
+                body {
+                	margin:0;
+                	padding:0;
+                	font-size: 18px;
+                	font-family: 'Maven Pro', sans-serif;
+                }
+                #page-header{
+                	background-color:#434a54;
+                	color:white;
+                	min-height:250px;
+                }
+                .header_img{
+                	padding-top:12px;
+                }
+                h1{
+                	text-align:center;
+                }
+                hr{
+                	width: 80px;
+                    border: none;
+                    border-top: 3px solid #A0D468;
+                }
+                section {
+                	padding-top: 20px;
+                }
+                section, .header_img {
+                    width: 70%;
+                    margin: auto;
+                }
+                section p, section li{
+                	color:#717F8C;
+                }
+                a {
+                	color:#A0D468;
+                	text-decoration: none;
+                }
+                a:hover {
+                	text-decoration: underline;
+                	color: #8CC152;
+                }
+                .button {
+                	background-color: #A0D468;
+                	color: #FFF;
+                	display: inline-block;
+                	padding: 10px 25px;
+                	text-decoration: none !important;
+                	margin-bottom: 50px;
+                	transition: all 0.2s;
+                }
+                .button:hover {
+                	background-color: #8CC152;
+                	color: white;
+                }
+                h2 {
+                	color: #A0D468;
+                }
+                h3 {
+                	margin-top: 30px;
+                	margin-bottom: -10px;
+                	color: #434A54;
+                }
+                p > code, h2 > co {
+                	color: #DA4453;
+                }
+                pre > code {
+                	border: 1px solid #E6E9ED;
+                	border-radius: 3px;
+                	background-color: #F5F7FA !important;
+                }
+                code {
+                	font-size: 16px;
+                }
+                cite {
+                	color: #AAB2BD;
+                	border-left: 5px solid #E6E9ED;
+                	padding-left: 15px;
+                	font-style: normal;
+                	display: block;
+                	margin-top: 5px;
+                	margin-bottom: 20px;
+                }
+                @media (max-width: 992px){
+                	section, .header_img{
+                		width:80%;
+                	}
+                }
+                @media (max-width: 350px){
+                	header{
+                		height:300px;
+                	}
+                }
+                #drips-error, .error {
+                    color: #DA4453;
+                }
 
-        .fa-check, #drips-success {
-            color: #A0D468;
-        }
+                #drips-success {
+                    color: #A0D468;
+                }
 
-        #drips-error, #drips-success {
-            font-size: 22px;
-        }
+                #drips-error, #drips-success {
+                    font-size: 22px;
+                }
 
-        td {
-            color: #717F8C;
-        }
+                td {
+                    color: #717F8C;
+                }
 
-        .color-change {
-            transition: color 1s;
-        }
+                .color-change {
+                    transition: color 1s;
+                }
+
+                li {
+                    margin-bottom: 10px;
+                    list-style-type: none;
+                }
+                li > label > p {
+                    margin: 0;
+                    padding: 0;
+                    text-indent: 22px;
+                }
+                small {
+                    text-align: center;
+                }
         	</style>
         </head>
         <body>
@@ -146,93 +160,117 @@ if(!is_dir(__DIR__.'/vendor')){
         		<hr/>
         	</header>
         	<section id="content">
-        <h2>Schön dass du dich für Drips entschieden hast.</h2>
-        <p>
-            Damit Drips ordnungsgemäß funktioniert, ist ein Installationsvorgang nötig. Klicke auf den Button um den Installationsvorgang zu starten.
-        </p>
-        <cite>
-            Auch wenn du Drips bereits installiert hast, kann es sein, dass einige Abhängigkeiten fehlen - diese werden einfach nachinstalliert. Deine bestehenden Daten bleiben natürlich erhalten.</p>
-        </cite>
-        <div style="text-align:center">
-            <p id="drips-error" style="display: none;"><i class="fa fa-times"></i> Drips konnte nicht installiert werden!</p>
-            <div id="loading" style="display: none;">
-                <i class="fa fa-refresh fa-spin fa-3x fa-fw color-change" style="color: #717F8C;"></i>
-                <p>Drips wird installiert ...</p>
-            </div>
-            <h3 style="font-size: 14px;" id="envsel">
-                <label>Umgebung:
-                    <select name="env">
-                        <option value="dev">Development</option>
-                        <option value="prod">Production</option>
-                    </select>
-                </label>
-            </h3>
-            <br>
-            <br>
-            <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
-            <p id="drips-success" style="display: none;"><i class="fa fa-check"></i> Drips wurde erfolgreich installiert!</p>
-            <a href="./" class="button" id="continueBtn" style="display: none;">Weiter <i class="fa fa-arrow-right"></i></a>
-            <div id="install-failed" style="display: none;text-align: left;">
+                <h2>Schön dass du dich für Drips entschieden hast.</h2>
+                <p>
+                    Damit Drips ordnungsgemäß funktioniert, ist ein Installationsvorgang nötig. Klicke auf den Button um den Installationsvorgang zu starten.
+                </p>
                 <cite>
-                    Wenn Drips mithilfe dieses Installers nicht installiert werden kann, kannst du versuchen es manuell zu installieren. Hierfür musst du folgendes Kommando auf der Kommandozeile ausführen:
+                    Auch wenn du Drips bereits installiert hast, kann es sein, dass einige Abhängigkeiten fehlen - diese werden einfach nachinstalliert. Deine bestehenden Daten bleiben natürlich erhalten.</p>
                 </cite>
-                <pre><code>php drips install</code></pre>
-            </div>
-        </div>
-        <script type="text/javascript">
-            var colors = ['#FFCE54', '#F6BB42', '#FC6E41', '#E9573F', '#ED5565', '#DA4453', '#EC87C0', '#D770AD', '#AC92EC', '#967ADC', '#4A89DC', '#5D9CEC', '#3BAFDA', '#4FC1E9', '#37BC9B', '#48CFAD', '#A0D468', '#8CC152'];
-            var current_color = 0;
 
-            $("#installBtn").click(function(e){
-                e.preventDefault();
-                $("#drips-error").hide();
-                $("#install-failed").hide();
-                $(this).hide();
-                $("#envsel").hide();
-                $("#loading").show();
-                setInterval(function(){
-                    $('.color-change').css('color', colors[current_color]);
-                    if((current_color + 1) < colors.length){
-                        current_color++;
-                    } else {
-                        current_color = 0;
-                    }
-                }, 1500);
-                var url = '?install';
-                if($('envsel').val() == 'prod'){
-                    url += '&prod';
-                }
-                $.get(url, function(result){
-                    $("#loading").hide();
-                    if(result == 1){
-                        $("#drips-success").show();
-                        $("#continueBtn").show();
-                    } else {
-                        $("#drips-error").show();
-                        $("#install-failed").show();
-                        $("#installBtn").show();
-                        $("#envsel").show();
-                    }
-                    $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
-                });
-            });
-        </script>
-        </section>
+                <?php if (strncasecmp(PHP_OS, 'WIN', 3) == 0 && stripos(getenv('PATH'), 'php') === false): ?>
+                    <div class="error"><strong>Achtung:</strong> Umgebungsvariable setzen!</div>
+                    <br>
+                    <a href="./" class="button">Weiter <i class="fa fa-arrow-right"></i></a>
+                <?php else: ?>
+                    <div style="text-align:center">
+                        <p id="drips-error" style="display: none;"><i class="fa fa-times"></i> Drips konnte nicht installiert werden!</p>
+                        <div id="loading" style="display: none;">
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw color-change" style="color: #717F8C;"></i>
+                            <p>Drips wird installiert ...<br>
+                                <small>
+                                    Der Installationsprozess, kann abhängig von deiner Internetverbindung mehrere Minuten in Anspruch nehmen - wir bitten um Geduld.
+                                </small>
+                            </p>
+                        </div>
+                        <div style="font-size: 14px; text-align: left;" id="envsel">
+                            <h3>Umgebung wählen</h3>
+                            <ul>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="env" value="dev" checked="checked">
+                                        <strong>Development:</strong>
+                                        <p>Drips wird im Debug-Modus installiert - sämtlich Fehlermeldungen und Debugging-Informationen werden angezeigt.</p>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="env" value="prod">
+                                        <strong>Production:</strong>
+                                        <p>Drips deaktiviert Fehlermeldungen und aktiviert spezielle Sicherheitsmechanismen für den Produktivbetrieb.</p>
+                                    </label>
+                                </li>
+                            </ul>
+                            <p>Die Umgebung kann jederzeit während dem Betrieb geändert werden.</p>
+                        </div>
+                        <br>
+                        <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
+                        <p id="drips-success" style="display: none;"><i class="fa fa-check"></i> Drips wurde erfolgreich installiert!</p>
+                        <a href="./" class="button" id="continueBtn" style="display: none;">Installation abschließen <i class="fa fa-check"></i></a>
+                        <div id="install-failed" style="display: none;text-align: left;">
+                            <cite>
+                                Wenn Drips mithilfe dieses Installers nicht installiert werden kann, kannst du versuchen es manuell zu installieren. Hierfür musst du folgendes Kommando auf der Kommandozeile ausführen:
+                            </cite>
+                            <pre><code>php drips install</code></pre>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        var colors = ['#FFCE54', '#F6BB42', '#FC6E41', '#E9573F', '#ED5565', '#DA4453', '#EC87C0', '#D770AD', '#AC92EC', '#967ADC', '#4A89DC', '#5D9CEC', '#3BAFDA', '#4FC1E9', '#37BC9B', '#48CFAD', '#A0D468', '#8CC152'];
+                        var current_color = 0;
+
+                        $("#installBtn").click(function(e){
+                            e.preventDefault();
+                            $("#drips-error").hide();
+                            $("#install-failed").hide();
+                            $(this).hide();
+                            $("#envsel").hide();
+                            $("#loading").show();
+                            setInterval(function(){
+                                $('.color-change').css('color', colors[current_color]);
+                                if((current_color + 1) < colors.length){
+                                    current_color++;
+                                } else {
+                                    current_color = 0;
+                                }
+                            }, 1500);
+                            var url = '?install';
+                            if($('envsel').val() == 'prod'){
+                                url += '&prod';
+                            }
+                            $.get(url, function(result){
+                                $("#loading").hide();
+                                if(result == 1){
+                                    $("#drips-success").show();
+                                    $("#continueBtn").show();
+                                } else {
+                                    $("#drips-error").show();
+                                    $("#install-failed").show();
+                                    $("#installBtn").show();
+                                    $("#envsel").show();
+                                }
+                                $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
+                            });
+                        });
+                    </script>
+                <?php endif; ?>
+                <br>
+            </section>
         </body>
         </html>
         <?php
+
     } else {
         shell_exec('php drips install');
-        if(isset($_GET['prod'])){
+        if (isset($_GET['prod'])) {
             shell_exec('php drips env prod');
         }
-        echo (int)is_dir(__DIR__.'/vendor');
+        echo (int) IS_INSTALLED;
     }
 } else {
-    if(!defined('DRIPS_DIRECTORY')){
+    if (!defined('DRIPS_DIRECTORY')) {
         define('DRIPS_DIRECTORY', __DIR__);
     }
-    if(!include(DRIPS_STARTUP)){
+    if (!include(DRIPS_STARTUP)) {
         die('Die Drips-Installation ist fehlgeschlagen!');
     }
 }
