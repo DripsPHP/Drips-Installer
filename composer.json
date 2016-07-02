@@ -17,5 +17,10 @@
             "php vendor/drips/drips/install.php"
         ]
     },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
 	"minimum-stability": "dev"
 }
