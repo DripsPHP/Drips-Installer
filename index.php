@@ -192,14 +192,14 @@ if (!IS_INSTALLED) {
                                 <li>
                                     <label>
                                         <input type="radio" name="env" value="dev" checked="checked">
-                                        <strong>Development:</strong>
+                                        <strong>Development</strong>
                                         <p>Drips wird im Debug-Modus installiert - sämtlich Fehlermeldungen und Debugging-Informationen werden angezeigt.</p>
                                     </label>
                                 </li>
                                 <li>
                                     <label>
                                         <input type="radio" name="env" value="prod">
-                                        <strong>Production:</strong>
+                                        <strong>Production</strong>
                                         <p>Drips deaktiviert Fehlermeldungen und aktiviert spezielle Sicherheitsmechanismen für den Produktivbetrieb.</p>
                                     </label>
                                 </li>
