@@ -9,6 +9,10 @@ if(getenv('COMPOSER_HOME') === false && getenv('HOME') === false){
 
 if (!IS_INSTALLED) {
     if (!isset($_GET['install'])) {
+        $htaccess = __DIR__.'/.htaccess';
+        if(file_exists($htaccess)){
+            unlink($htaccess);
+        }
         ?>
         <!DOCTYPE html>
         <html>
@@ -237,7 +241,7 @@ if (!IS_INSTALLED) {
                                 }
                             }, 1500);
                             var url = '?install';
-                            if($('envsel').val() == 'prod'){
+                            if($('input[value="prod"]').is(':checked')){
                                 url += '&prod';
                             }
                             $.get(url, function(result){
