@@ -196,9 +196,9 @@ if (!IS_INSTALLED) {
 						<li>Öffne die Systemsteuerung</li>
 						<li>System und Sicherheit / System / Erweiterte Systemeinstellungen / Umgebungsvariablen</li>
 						<li>Wähle unter Systemvariablen bearbeiten <pre>Path</pre> aus</li>
-						<li>Öffne den Explorer und kopiere den Pfad zur Datei <pre>exe.php</pre></li>
-						<li>Mit einem Klick auf Neu kannst du den Dateipfad einfügen</li>
-						<li>Bevor du die Installation starten kannst muss der Computer neugestartet werden</li>
+						<li>Öffne den Explorer und kopiere den Pfad zum Verzeichnis in dem sich die <pre>php.exe</pre> befindet</li>
+						<li>Mit einem Klick auf 'Neu' kannst du den Dateipfad einfügen</li>
+						<li>Bevor du die Installation starten kannst, musst du deinen Computer neustarten, dass die Änderungen in Kraft treten</li>
 					</ol>
                     <br>
                     <a href="./" class="button">Weiter <i class="fa fa-arrow-right"></i></a>
