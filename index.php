@@ -154,6 +154,13 @@ if (!IS_INSTALLED) {
                     padding: 0;
                     text-indent: 22px;
                 }
+				#systemvariable li{
+					list-style-type: decimal;
+				}
+				#systemvariable pre{
+					display:inline;
+				}
+
                 small {
                     text-align: center;
                 }
@@ -183,7 +190,16 @@ if (!IS_INSTALLED) {
                 </cite>
 
                 <?php if (strncasecmp(PHP_OS, 'WIN', 3) == 0 && stripos(getenv('PATH'), 'php') === false): ?>
-                    <div class="error"><strong>Achtung:</strong> Umgebungsvariable setzen!</div>
+                    <div class="error"><strong>Achtung:</strong> Damit Drips auch unter Windows funktioniert, muss eine Umgebungsvariable gesetzt werden.</div>
+					<p>Gehe dazu wie folgt vor:</p>
+					<ol id="systemvariable">
+						<li>Öffne die Systemsteuerung</li>
+						<li>System und Sicherheit / System / Erweiterte Systemeinstellungen / Umgebungsvariablen</li>
+						<li>Wähle unter Systemvariablen bearbeiten <pre>Path</pre> aus</li>
+						<li>Öffne den Explorer und kopiere den Pfad zur Datei <pre>exe.php</pre></li>
+						<li>Mit einem Klick auf Neu kannst du den Dateipfad einfügen</li>
+						<li>Bevor du die Installation starten kannst muss der Computer neugestartet werden</li>
+					</ol>
                     <br>
                     <a href="./" class="button">Weiter <i class="fa fa-arrow-right"></i></a>
                 <?php else: ?>

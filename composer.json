@@ -4,7 +4,9 @@
     "keywords": ["framework", "php", "drips", "prowect", "install", "installer"],
     "license": "MIT",
     "require": {
-        "drips/drips": "dev-master"
+        "drips/drips": "dev-master",
+        "drips/orm": "dev-master",
+        "drips/database": "dev-master"
     },
     "require-dev": {
         "drips/debugbar": "dev-master"
