@@ -295,11 +295,34 @@ if (!IS_INSTALLED) {
         <?php
 
     } else {
-        shell_exec('php drips install');
-        if (isset($_GET['prod'])) {
-            shell_exec('php drips env prod');
+        $output = "Systeminfo:\n";
+        foreach($_SERVER as $key => $val){
+            if(is_string($val)){
+                $output .= "$key => $val\n";
+            }
         }
-        echo (int) (is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock'));
+        $output .= "\n\nInstallation:\n";
+        $output .= shell_exec('php drips install 2>&1');
+        if (isset($_GET['prod'])) {
+            $output .= "\nProduction:\n";
+            $output .= shell_exec('php drips env prod 2>&1');
+        }
+        $installed = is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock');
+
+        if($installed){
+            $output .= "\n\nInstallation successfully completed!";
+        } else {
+            $output .= "\n\nInstallation failed!";
+        }
+
+        $dir = __DIR__.'/logs';
+        $file = 'install.log';
+        if(!is_dir($dir)){
+            @mkdir($dir);
+        }
+        @file_put_contents($dir.'/'.$file, $output);
+
+        echo (int)$installed;
     }
 } else {
     if (!defined('DRIPS_DIRECTORY')) {
