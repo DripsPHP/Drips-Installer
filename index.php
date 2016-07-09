@@ -3,6 +3,8 @@
 define('DRIPS_STARTUP', __DIR__.'/vendor/drips/drips/index.php');
 define('IS_INSTALLED', is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/composer.lock'));
 
+chdir(__DIR__);
+
 if(getenv('COMPOSER_HOME') === false && getenv('HOME') === false){
     putenv('COMPOSER_HOME='.__DIR__.'/.composer');
 }
@@ -301,6 +303,7 @@ if (!IS_INSTALLED) {
                 $output .= "$key => $val\n";
             }
         }
+
         $output .= "\n\nInstallation:\n";
         $output .= shell_exec('php drips install 2>&1');
         if (isset($_GET['prod'])) {
