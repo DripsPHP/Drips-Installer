@@ -5,6 +5,11 @@ define('IS_INSTALLED', is_dir(__DIR__.'/vendor') && file_exists(__DIR__.'/compos
 
 chdir(__DIR__);
 
+$permissions = false;
+if(is_writable(__DIR__)){
+    $permissions = true;
+}
+
 if(getenv('COMPOSER_HOME') === false && getenv('HOME') === false){
     putenv('COMPOSER_HOME='.__DIR__.'/.composer');
 }
@@ -12,7 +17,7 @@ if(getenv('COMPOSER_HOME') === false && getenv('HOME') === false){
 if (!IS_INSTALLED) {
     if (!isset($_GET['install'])) {
         $htaccess = __DIR__.'/.htaccess';
-        if(file_exists($htaccess)){
+        if(file_exists($htaccess) && $permissions){
             unlink($htaccess);
         }
         ?>
@@ -236,7 +241,15 @@ if (!IS_INSTALLED) {
                             <p>Die Umgebung kann jederzeit während dem Betrieb geändert werden.</p>
                         </div>
                         <br>
-                        <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
+                        <?php if($permissions): ?>
+                            <a href="#" class="button" id="installBtn">Installation starten <i class="fa fa-arrow-right"></i></a>
+                        <?php else: ?>
+                            <div style="text-align: left;">
+                                <p class="error">Drips verfügt nicht über ausreichend Berechtigungen um die Installation durchführen zu können. Passe deine Berechtigungen bitte wie folgt an:</p>
+                                <pre><code>chmod -R 0777 .</code></pre>
+                            </div>
+                            <a href="./" class="button">Weiter <i class="fa fa-arrow-right"></i></a>
+                        <?php endif; ?>
                         <p id="drips-success" style="display: none;"><i class="fa fa-check"></i> Drips wurde erfolgreich installiert!</p>
                         <a href="./" class="button" id="continueBtn" style="display: none;"><i class="fa fa-check"></i> Installation abschließen</a>
                         <div id="install-failed" style="display: none;text-align: left;">
