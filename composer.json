@@ -4,10 +4,10 @@
     "keywords": ["framework", "php", "drips", "prowect", "install", "installer"],
     "license": "MIT",
     "require": {
-        "drips/drips": "dev-master"
+        "drips/drips": "^1.0"
     },
     "require-dev": {
-        "drips/debugbar": "dev-master"
+        "drips/debugbar": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -21,6 +21,5 @@
         "psr-4": {
             "": "src/"
         }
-    },
-	"minimum-stability": "dev"
+    }
 }
